@@ -1,0 +1,38 @@
+{
+  "name": "ssbudata",
+  "description": "Mongo DB backend for capstone",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danrezz/SSBUdata.git"
+  },
+  "keywords": [
+    "smash",
+    "smash",
+    "brothers",
+    "SSBU",
+    "nintendo",
+    "mario",
+    "switch"
+  ],
+  "author": "Daniel Ramirez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danrezz/SSBUdata/issues"
+  },
+  "homepage": "https://github.com/danrezz/SSBUdata#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.13",
+    "nodemon": "^2.0.7"
+  }
+}
