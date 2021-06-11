@@ -16,6 +16,7 @@ userSchema.methods.generateAuthToken = function () {
     {
       _id: this._id,
       userName: this.userName,
+      email: this.email,
     },
     config.get("jwtSecret")
   );

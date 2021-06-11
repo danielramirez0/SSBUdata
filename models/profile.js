@@ -25,7 +25,7 @@ function validateProfile(profile) {
     generalTechniqueProgress: Joi.array().required(),
     characterKnowledgeProgress: Joi.array().required(),
   });
-  return schema.validate(friend);
+  return schema.validate(profile);
 }
 
 exports.Profile = Profile;
