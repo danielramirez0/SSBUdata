@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   userName: { type: String, require: true, minlength: 3, maxlength: 255 },
   email: { type: String, require: true, minlength: 7, maxlength: 255 },
   password: { type: String, require: true, minlength: 5, maxlength: 1024 },
-  profile: [Profile.schema],
+  profile: { type: mongoose.Types.ObjectId, required: true },
+  // profile: { type: String, require: true, minlength: 5, maxlength: 1024 },
 });
 
 userSchema.methods.generateAuthToken = function () {
