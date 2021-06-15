@@ -53,10 +53,10 @@ router.post("/:refId", profileValidation, async (req, res) => {
 // Update a user profile
 router.put("/:refId", [auth, profileValidation], async (req, res) => {
   try {
-    const profile = await Profile.findOne(req.params.refID);
+    let profile = await Profile.findOne(req.params.refID);
     if (!profile)
       return res.status(400).send(`A profile with refID ${req.params.refId} does not exist`);
-    const profile = req.body.profile;
+    profile = req.body.profile;
 
     await profile.save();
     return res.send(profile);
