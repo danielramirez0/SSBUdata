@@ -1,5 +1,5 @@
 const { User } = require("../models/user");
-const { userValidation } = require("../middleware/validation");
+const userValidation = require("../middleware/userValidation");
 const bcrypt = require("bcrypt");
 const auth = require("../middleware/auth");
 const express = require("express");
@@ -26,7 +26,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // register new User
-router.post("/", [userValidation], async (req, res) => {
+router.post("/", userValidation, async (req, res) => {
   try {
     let user = await User.findOne({ email: req.body.user.email });
     if (user) return res.status(400).send("User already registered");

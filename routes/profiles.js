@@ -1,5 +1,5 @@
 const { Profile } = require("../models/profile");
-const { profileValidation } = require("../middleware/validation");
+const profileValidation = require("../middleware/profileValidation");
 const auth = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
@@ -26,7 +26,7 @@ router.get("/ref/:refId", auth, async (req, res) => {
 });
 
 // add user profile
-router.post("/:refId", async (req, res) => {
+router.post("/:refId", profileValidation, async (req, res) => {
   try {
     const existingProfile = await Profile.findById(req.params.refId);
     if (existingProfile)
