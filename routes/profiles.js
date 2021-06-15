@@ -4,6 +4,16 @@ const auth = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  try {
+    const profiles = await Profile.find();
+    if (!profiles) return res.status(400).send("No profiles found");
+    return res.send(profiles);
+  } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const profile = await Profile.findById(req.params.id);
@@ -26,7 +36,7 @@ router.get("/ref/:refId", auth, async (req, res) => {
 });
 
 // add user profile
-router.post("/:refId", profileValidation, async (req, res) => {
+router.post("/", profileValidation, async (req, res) => {
   try {
     const existingProfile = await Profile.findById(req.params.refId);
     if (existingProfile)
