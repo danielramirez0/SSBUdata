@@ -37,7 +37,7 @@ router.post("/", userValidation, async (req, res) => {
       userName: req.body.user.userName,
       email: req.body.user.email,
       password: await bcrypt.hash(req.body.user.password, salt),
-      profile: req.body.user.refId,
+      profile: req.body.user.profile,
     });
 
     await user.save();
