@@ -3,26 +3,26 @@ const Joi = require("joi");
 
 const profileSchema = new mongoose.Schema({
   refID: { type: mongoose.Types.ObjectId, default: "60a00b00000000000c00000d" },
-  goals: { type: Array, required: true },
-  mainCharacter: { type: String },
-  alternateCharacters: { type: Array, required: true },
-  activeStudyingCharacter: { type: String },
-  generalKnowledgeProgress: { type: Array, required: true },
-  generalTechniqueProgress: { type: Array, required: true },
-  characterKnowledgeProgress: { type: Array, required: true },
+  goals: { type: Array, default: [{ text: "Make some goals!", complete: false }] },
+  mainCharacter: { type: String, default: "unknown" },
+  alternateCharacters: { type: Array, default: [] },
+  activeStudyingCharacter: { type: String, default: "unknown" },
+  generalKnowledgeProgress: { type: Array, default: [] },
+  generalTechniqueProgress: { type: Array, default: [] },
+  characterKnowledgeProgress: { type: Array, default: [] },
 });
 
 const Profile = mongoose.model("profile", profileSchema);
 
 function validateProfile(profile) {
   const schema = Joi.object({
-    goals: Joi.required(),
+    goals: Joi.array(),
     mainCharacter: Joi.string(),
-    alternateCharacters: Joi.array().required(),
+    alternateCharacters: Joi.array(),
     activeStudyingCharacter: Joi.string(),
-    generalKnowledgeProgress: Joi.array().required(),
-    generalTechniqueProgress: Joi.array().required(),
-    characterKnowledgeProgress: Joi.array().required(),
+    generalKnowledgeProgress: Joi.array(),
+    generalTechniqueProgress: Joi.array(),
+    characterKnowledgeProgress: Joi.array(),
   });
   return schema.validate(profile);
 }
