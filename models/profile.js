@@ -4,9 +4,9 @@ const Joi = require("joi");
 const profileSchema = new mongoose.Schema({
   refID: { type: mongoose.Types.ObjectId, default: "60a00b00000000000c00000d" },
   goals: { type: Array, default: [{ text: "Make some goals!", complete: false }] },
-  mainCharacter: { type: String, default: "unknown" },
+  mainCharacter: { type: String, default: "none" },
   alternateCharacters: { type: Array, default: [] },
-  activeStudyingCharacter: { type: String, default: "unknown" },
+  activeStudyingCharacter: { type: String, default: "none" },
   generalKnowledgeProgress: { type: Array, default: [] },
   generalTechniqueProgress: { type: Array, default: [] },
   characterKnowledgeProgress: { type: Array, default: [] },
