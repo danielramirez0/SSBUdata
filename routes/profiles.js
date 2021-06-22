@@ -1,4 +1,5 @@
 const { Profile } = require("../models/profile");
+const mongoose = require("mongoose");
 const profileValidation = require("../middleware/profileValidation");
 const auth = require("../middleware/auth");
 const express = require("express");
@@ -28,8 +29,9 @@ router.get("/:id", async (req, res) => {
 //get a user profile by user ID
 router.get("/ref/:refID", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne(req.params.refID);
-    if (!profile) return res.status(400).send(`No profile found with refID ${req.params.id}.`);
+    const id = mongoose.Types.ObjectId(`${req.params.refID}`);
+    const profile = await Profile.findOne({ refID: id });
+    if (!profile) return res.status(400).send(`No profile found with refID ${req.params.refID}.`);
     return res.send(profile);
   } catch (ex) {
     return res.status(500).send(`Internal Server Error: ${ex}`);
@@ -38,16 +40,8 @@ router.get("/ref/:refID", auth, async (req, res) => {
 
 // add user profile
 router.post("/", profileValidation, async (req, res) => {
-  // if (ref.body.refID) {
-  //   const existingProfile = await Profile.findById(req.body.refID);
-  //   if (existingProfile)
-  //     return res
-  //       .status(400)
-  //       .send(`Profile already exists, use PUT method to update with ${existingProfile._id}`);
-  // }
   try {
     const profile = new Profile(req.body);
-
     await profile.save();
     return res.send(profile);
   } catch (ex) {

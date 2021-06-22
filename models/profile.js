@@ -16,6 +16,7 @@ const Profile = mongoose.model("profile", profileSchema);
 
 function validateProfile(profile) {
   const schema = Joi.object({
+    refID: Joi.allow(),
     goals: Joi.array(),
     mainCharacter: Joi.string(),
     alternateCharacters: Joi.array(),

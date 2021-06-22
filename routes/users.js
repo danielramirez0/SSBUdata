@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 // get a user by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     return res.send(user);
@@ -28,16 +28,16 @@ router.get("/:id", async (req, res) => {
 // register new User
 router.post("/", userValidation, async (req, res) => {
   try {
-    let user = await User.findOne({ email: req.body.user.email });
+    const email = req.body.email.toLowerCase();
+    let user = await User.findOne({ email: email });
     if (user) return res.status(400).send("User already registered");
 
     const salt = await bcrypt.genSalt(10);
 
     user = new User({
-      userName: req.body.user.userName,
-      email: req.body.user.email,
-      password: await bcrypt.hash(req.body.user.setupPassword, salt),
-      profileID: req.body.user.profileID,
+      userName: req.body.userName,
+      email: req.body.email,
+      password: await bcrypt.hash(req.body.password, salt),
     });
 
     await user.save();
